@@ -1,0 +1,83 @@
+{
+  "users": [
+    {
+      "name": "test",
+      "email": "test@test",
+      "password": "test",
+      "id": 1
+    },
+    {
+      "name": "alpesh",
+      "email": "alpesh@test",
+      "password": "alpesh123",
+      "id": 2
+    },
+    {
+      "name": "qwe",
+      "email": "qwe@qwe",
+      "password": "qwe",
+      "id": 3
+    },
+    {
+      "name": "peter",
+      "email": "peter@gmail.com",
+      "password": "peter123",
+      "id": 4
+    },
+    {
+      "name": "123",
+      "email": "123@gmail.com",
+      "password": "123123",
+      "id": 5
+    },
+    {
+      "name": "123",
+      "email": "alpesh@test123",
+      "password": "alpesh123123",
+      "id": 6
+    },
+    {
+      "name": "sparkle",
+      "email": "sparkle@test",
+      "password": "sparkle",
+      "id": 7
+    }
+  ],
+  "resto": [
+    {
+      "id": 1,
+      "name": "Surat Resto.",
+      "address": "Surat"
+    },
+    {
+      "id": 2,
+      "name": "Ahmdbd Resto.",
+      "address": "Ahmdbd"
+    },
+    {
+      "id": 3,
+      "name": "Bardoli Resto.",
+      "address": "Bardoli"
+    },
+    {
+      "name": "test Resto.",
+      "address": "Test",
+      "id": 4
+    },
+    {
+      "name": "test Resto.",
+      "address": "Test",
+      "id": 5
+    },
+    {
+      "name": "nothing",
+      "address": "nothing 123 123, nothing",
+      "id": 6
+    },
+    {
+      "name": "testing",
+      "address": "123, testing 123123, testing",
+      "id": 7
+    }
+  ]
+}
