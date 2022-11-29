@@ -41,6 +41,16 @@
       "email": "sparkle@test",
       "password": "sparkle",
       "id": 7
+    },
+    {
+      "name": "123",
+      "email": "asfdgdfg@test",
+      "password": "sdfg",
+      "id": 8
+    },
+    {
+      "{\"name\":\"qwe\",\"email\":\"qwe@test\",\"password\":\"qwe\"}": "",
+      "id": 9
     }
   ],
   "resto": [
@@ -76,7 +86,7 @@
     },
     {
       "name": "testing",
-      "address": "123, testing 123123, testing",
+      "address": "123, testing, 123123",
       "id": 7
     }
   ]

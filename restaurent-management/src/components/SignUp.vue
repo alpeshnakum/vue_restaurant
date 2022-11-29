@@ -1,13 +1,14 @@
 <template>
     <div class="register">
         <h1>Sign Up</h1>
-        <form @submit="fn_signUp" method="post">
+        <form method="post" @submit.prevent="fn_signUp">
             <div class="register">
-                <input  @keyup="isValidName()" type="text" v-model="name" placeholder="Enter your Name" required>
+                <input @keyup="isValidName()" type="text" v-model="name" placeholder="Enter your Name" required>
                 <p v-if="!isValidName_var" class="errEmail" style="color: red;">Name is required</p>
-                <input  @keyup="isValidEmail()" type="email" v-model="email" placeholder="Enter your Email" required>
+                <input @keyup="isValidEmail()" type="email" v-model="email" placeholder="Enter your Email" required>
                 <p v-if="!isValidEmail_var" class="errEmail" style="color: red;">Email is required</p>
-                <input  @keyup="isValidPassword()" type="password" v-model="password" placeholder="Enter your Password" required>
+                <input @keyup="isValidPassword()" type="password" v-model="password" placeholder="Enter your Password"
+                    required>
                 <p v-if="!isValidPassword_var" class="errEmail" style="color: red;">Password is required</p>
                 <!-- <input type="submit" v-on:click="fn_signUp" value="Sign Up" /> -->
                 <input type="submit" value="Sign Up" />
@@ -25,7 +26,7 @@ export default {
     data() {
         return {
             isValidName_var: true,
-            isValidEmail_var:true,
+            isValidEmail_var: true,
             isValidPassword_var: true,
             name: null,
             email: null,
@@ -34,27 +35,26 @@ export default {
     },
     methods: {
         isValidName() {
-            this.isValidName_var =!!this.name
+            this.isValidName_var = !!this.name
             return !!this.name;
         },
         isValidEmail() {
-            this.isValidEmail_var =!!this.email
+            this.isValidEmail_var = !!this.email
             return !!this.email;
         },
         isValidPassword() {
             this.isValidPassword_var = !!this.password;
             return !!this.password;
         },
-        async fn_signUp(e) {
-            e.preventDefault();
+        async fn_signUp() {
+            var data = JSON.stringify({
+                "name": this.name,
+                "email": this.email,
+                "password": this.password
+            });
+
             // to save data in API we have to use post() || if we fetch data then will use get()
-            let saveData = await axios.post(
-                "http://localhost:3000/users", {
-                    name: this.name,
-                    email: this.email,
-                    password: this.password,
-                }                
-            );
+            let saveData = await axios.post("http://localhost:3000/users", data);
             console.log(saveData);
             if (saveData.status == 201) { 
                 localStorage.setItem("user-info", JSON.stringify(saveData.data)); // JSON.stringify will convert data into string from object
@@ -66,22 +66,23 @@ export default {
     mounted() {
         let is_logged = localStorage.getItem('user-info');
         if (is_logged) {
-            this.$router.push({name: 'homeComp'});
+            this.$router.push({ name: 'homeComp' });
         }
     }
 }
 </script>
 
 <style scoped>
-.register{
+.register {
     font-family: Avenir, Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
-	margin: 20px;
-	padding: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin: 20px;
+    padding: 20px;
 }
+
 .logo {
     width: 100px;
 }
