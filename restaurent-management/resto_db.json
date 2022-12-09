@@ -83,11 +83,6 @@
       "name": "nothing",
       "address": "nothing 123 123, nothing",
       "id": 6
-    },
-    {
-      "name": "testing",
-      "address": "123, testing, 123123",
-      "id": 7
     }
   ]
 }

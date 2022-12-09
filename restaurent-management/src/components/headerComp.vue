@@ -15,10 +15,10 @@
 
 export default {
     name: 'headerComp',
-    methods: { 
+    methods: {
         logout() {
             localStorage.clear();
-            this.$router.push({name: 'loginComp'});
+            this.$router.push({ name: 'loginComp' });
         }
     }
 }
@@ -26,12 +26,12 @@ export default {
 
 
 <style scoped>
-.nav{
+.nav {
     background-color: #333;
     overflow: hidden;
 }
 
-.menu-item{
+.menu-item {
     float: left;
     color: white;
     text-align: center;
@@ -40,7 +40,7 @@ export default {
     font-size: 20px;
 }
 
-.menu-item:hover{
+.menu-item:hover {
     background-color: #ddd;
     color: #222;
 }

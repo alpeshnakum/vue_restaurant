@@ -1,5 +1,6 @@
 <template>
     <div class="home">
+        <vueSpinner :start="start" />
         <headerComp></headerComp>
         <h1>Hello {{ name }}, Welcome to home page</h1>
         <!-- <p>{{arrResto}}</p> -->
@@ -15,6 +16,7 @@
                 <td>{{ resto.name }}</td>
                 <td>{{ resto.address }}</td>
                 <td>
+                    <router-link class="btnView" :to="'/view-resto/' + resto.id">View</router-link>
                     <router-link class="btnUpdate" :to="'/update-resto/' + resto.id">Update</router-link>
                     <a class="btnDelete" @click="deleteResto(resto.id)">Delete</a>
                 </td>
@@ -24,29 +26,33 @@
 </template>
 
 <script>
+import vueSpinner from '@/components/spinnerComp.vue';
 import headerComp from './headerComp.vue';
 import axios from 'axios';
 
 export default {
     name: 'homeComp',
     components: {
-        headerComp
+        headerComp,
+        vueSpinner
     },
     data() {
         return {
+            start: true,
             name: '',
             arrResto: [],
         }
     },
     methods: {
         async deleteResto(id) {
+            this.start = true;
             // console.warn(id);
             var text = "Want to delete Restaurent?";
             if (confirm(text) == true) {
                 var deleteResto = await axios.delete("http://localhost:3000/resto/" + id);
                 if (deleteResto.status == 200) {
                     this.loadData();
-                } else { 
+                } else {
                     alert('Error while deleting Restaurent');
                 }
             }
@@ -60,6 +66,7 @@ export default {
             var getResto = await axios.get('http://localhost:3000/resto');
             this.arrResto = getResto.data;
             console.warn(getResto);
+            this.start = false;
         }
     },
     async mounted() {
@@ -82,21 +89,30 @@ export default {
     padding: 10px;
 }
 
-.btnDelete{
+.btnDelete {
     cursor: pointer;
     margin: 10px;
-    background-color: rgba(207,207,207,0.68);
+    background-color: rgba(207, 207, 207, 0.68);
     color: red;
     padding: 8px;
     border-radius: 6px;
 }
 
-.btnUpdate{
+.btnUpdate {
     text-decoration: none;
     cursor: pointer;
     margin: 10px;
-    background-color: rgba(207,207,207,0.68);
+    background-color: rgba(207, 207, 207, 0.68);
     color: blue;
+    padding: 8px;
+    border-radius: 6px;
+}
+.btnView {
+    text-decoration: none;
+    cursor: pointer;
+    margin: 10px;
+    background-color: rgba(207, 207, 207, 0.68);
+    color: green;
     padding: 8px;
     border-radius: 6px;
 }

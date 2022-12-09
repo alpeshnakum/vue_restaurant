@@ -1,10 +1,12 @@
 <template>
     <div class="home">
+        <vueSpinner :start="start" />
         <headerComp></headerComp>
         <h1>Add Restaurent</h1>
         <form class="add-resto-form">
             <input type="text" v-model="resto.name" required placeholder="Enter Resto Name" />
             <textarea v-model="resto.address" required placeholder="Enter your Address"></textarea>
+            <p v-if="isError" style="color: red;">All fields are required.</p>
             <button type="button" @click="addResto">Add Resto</button>
         </form>
     </div>
@@ -12,15 +14,20 @@
 
 <script>
 import headerComp from './headerComp.vue';
+import vueSpinner from '@/components/spinnerComp.vue';
 import axios from 'axios';
 
 export default {
     name: 'addResto',
+    isError: false,
     components: {
-        headerComp
+        headerComp,
+        vueSpinner
     },
     data() {
         return {
+            start: true,
+            isError: false,
             resto: {
                 name: '',
                 address: '',
@@ -28,16 +35,22 @@ export default {
         }
     },
     methods: {
+
         async addResto() {
-            console.log(this.resto);
-            var saveResto = await axios.post("http://localhost:3000/resto", {
-                name: this.resto.name,
-                address: this.resto.address,
-            });
-            console.warn(saveResto);
-            if (saveResto.status == 201) { 
-                alert("Restaurent saved.");
-                this.$router.push({name: 'homeComp'});
+            if (this.resto.name == '' || this.resto.name == null || this.resto.address == '' || this.resto.address == null) {
+                console.log("inside if part");
+                this.isError = true;
+            } else {
+                console.log(this.resto);
+                var saveResto = await axios.post("http://localhost:3000/resto", {
+                    name: this.resto.name,
+                    address: this.resto.address,
+                });
+                console.warn(saveResto);
+                if (saveResto.status == 201) {
+                    alert("Restaurent saved.");
+                    this.$router.push({ name: 'homeComp' });
+                }
             }
         }
     },
@@ -46,6 +59,7 @@ export default {
         if (!is_logged) {
             this.$router.push({ name: 'SignUp' });
         }
+        this.start = false;
     }
 }
 </script>
